@@ -10,11 +10,43 @@
   height: 282px;
 }
 
-.container .slider #activeImage {
+.container .slider .images-container {
   width: 500px;
   height: 100%;
+  position: relative;
+}
+
+.container .slider .images-container img {
   aspect-ratio: 16/9;
   object-fit: contain;
+  position: absolute;
+  transition: all ease 0.3s;
+  opacity: 0;
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+}
+
+.container .slider .images-container img.active {
+  left: 0;
+  opacity: 1;
+  z-index: 9;
+}
+
+.container .slider .images-container img.animation-slide-to-left {
+  animation: slideToLeft linear 0.3s;
+}
+
+.container .slider .images-container img.animation-slide-to-right {
+  animation: slideToRight linear 0.3s;
+}
+
+.container .slider .images-container img.animation-slide-from-left {
+  animation: slideFromLeft linear 0.3s;
+}
+
+.container .slider .images-container img.animation-slide-from-right {
+  animation: slideFromRight linear 0.3s;
 }
 
 .container .arrow {
@@ -34,4 +66,39 @@
 
 .container .arrow img {
   max-width: 100%;
+}
+
+@keyframes slideToLeft {
+  from {
+    left: 0px;
+  }
+  to {
+    left: -100%;
+  }
+}
+
+@keyframes slideToRight {
+  from {
+    left: 0px;
+  }
+  to {
+    left: 100%;
+  }
+}
+
+@keyframes slideFromRight {
+  from {
+    left: 100%;
+  }
+  to {
+    left: 0px;
+  }
+}
+@keyframes slideFromLeft {
+  from {
+    left: -100%;
+  }
+  to {
+    left: 0px;
+  }
 }
