@@ -52,7 +52,7 @@ const setActiveImage = (targetImage, direction) => {
 
 setActiveImage(images[0], DIRECTIONS.LEFT);
 
-leftArrowEl.addEventListener("click", () => {
+function prevImage() {
   let currentIndex = images.indexOf(currentImage);
   if (currentIndex - 1 < 0) {
     currentIndex = images.length - 1;
@@ -60,9 +60,9 @@ leftArrowEl.addEventListener("click", () => {
     currentIndex--;
   }
   setActiveImage(images[currentIndex], DIRECTIONS.LEFT);
-});
+}
 
-rightArrowEl.addEventListener("click", () => {
+function nextImage() {
   let currentIndex = images.indexOf(currentImage);
   if (currentIndex + 1 === images.length) {
     currentIndex = 0;
@@ -70,4 +70,23 @@ rightArrowEl.addEventListener("click", () => {
     currentIndex++;
   }
   setActiveImage(images[currentIndex], DIRECTIONS.RIGHT);
+}
+
+leftArrowEl.addEventListener("click", () => {
+  prevImage();
+});
+
+rightArrowEl.addEventListener("click", () => {
+  nextImage();
+});
+
+// Hammer JS for swipes
+// var Hammer = require("https://hammerjs.github.io/dist/hammer.min.js");
+const activeImgEl = document.querySelector(".images-container");
+const hm = new Hammer(activeImgEl);
+hm.on("swipeleft", () => {
+  prevImage();
+});
+hm.on("swiperight", () => {
+  nextImage();
 });
